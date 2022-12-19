@@ -9,7 +9,10 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-*.firebase.js
+*.config.js
 
+# unneccesary classes
+*.database.js
+Signup.js
 # macOS
 .DS_Store
