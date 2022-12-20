@@ -32,6 +32,7 @@ export default function Home({ navigation }) {
       snapshot.forEach(doc => {
         //console.log(doc.id, '=>', doc.data());
         data.push(doc.data());
+        console.log("nothing", password)
       });
       setPassword(data);
       console.log("ok", password);
@@ -58,20 +59,8 @@ export default function Home({ navigation }) {
         })
     }
   }
-  const DATA = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-  ];
+
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
   const Item = ({ title }) => (
     <View style={styles.item}>
@@ -79,7 +68,11 @@ export default function Home({ navigation }) {
     </View>
   );
   const renderItem = ({ item }) => (
-    <Item title={item.title} />
+    <View>
+      <Item title={item.heading} />
+      <Item title={item.createdAt.toDate().toLocaleDateString('en-EN', options)} />
+      <Item title={item.password} />
+    </View>
   );
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -97,13 +90,12 @@ export default function Home({ navigation }) {
         </TouchableOpacity>
       </View>
       <View style={styles.main}>
-          <Text>Password List:</Text>
+        <Text>Password List:</Text>
       </View>
-        {console.log("data", password.values)}
-        <FlatList
-          data={password}
-          renderItem={renderItem}
-        />
+      <FlatList
+        data={password}
+        renderItem={renderItem}
+      />
     </SafeAreaView>
   );
 }
